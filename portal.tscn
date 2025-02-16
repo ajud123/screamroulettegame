@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk46mxhiyydon"]
+
+[ext_resource type="Shader" path="res://portalshader.gdshader" id="1_r8x6k"]
+[ext_resource type="Script" path="res://gateway.gd" id="2_rgf4n"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_erx50"]
+viewport_path = NodePath("hall/portal/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmp8i"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_r8x6k")
+shader_parameter/gamma = 10.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_erx50")
+
+[sub_resource type="QuadMesh" id="QuadMesh_gcmns"]
+flip_faces = true
+size = Vector2(1.39, 3.055)
+orientation = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fh0fr"]
+size = Vector3(0.078, 3.055, 1.39)
+
+[node name="portal" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0645, 1.22576, 3.32173)
+layers = 2
+material_override = SubResource("ShaderMaterial_mmp8i")
+mesh = SubResource("QuadMesh_gcmns")
+script = ExtResource("2_rgf4n")
+size = Vector2(1, 1)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)
+
+[node name="anchor" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.84488, 1.22576, 3.32173)
+
+[node name="body" type="Node3D" parent="SubViewport/anchor"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/anchor/body"]
+transform = Transform3D(-0.876391, 0, 0.481601, 0, 1, 0, -0.481601, 0, -0.876391, 0, 0, 0)
+cull_mask = 1048573
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewport/anchor/body/Camera3D"]
+visible = false
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="SubViewport/anchor/body/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.437035)
+visible = false
+
+[node name="teleporter" type="Area3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.3, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teleporter"]
+transform = Transform3D(1, 6.92069e-12, 8.63974e-20, -6.92069e-12, 1, 2.13163e-14, -8.63974e-20, -2.13163e-14, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_fh0fr")
+
+[connection signal="body_entered" from="teleporter" to="." method="_on_teleporter_body_entered"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://uvi116y6txc1"]
+
+[ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_5lydi"]
+[ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="1_oelvs"]
+[ext_resource type="Shader" path="res://portalshader.gdshader" id="2_1txxt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pgcnx"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ayps2"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfb5q"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_1txxt")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_pgcnx")
+shader_parameter/texture_albedo2 = SubResource("ViewportTexture_ayps2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_je0p4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6o27j"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkii0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_1txxt")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_je0p4")
+shader_parameter/texture_albedo2 = SubResource("ViewportTexture_6o27j")
+
+[node name="test1" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_5lydi")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.16996, 0.352995, 0.180609)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+use_collision = true
+size = Vector3(2.145, 3, 57.195)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+operation = 2
+size = Vector3(1.59, 2.5, 118.65)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[node name="portal" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("1_oelvs")]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -7.682, 0, 0)
+material_override = SubResource("ShaderMaterial_jfb5q")
+skeleton = NodePath("../..")
+pair = NodePath("../portal2")
+size = Vector2(3, 3)
+
+[node name="portal2" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("1_oelvs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9078, 0, 0)
+material_override = SubResource("ShaderMaterial_fkii0")
+skeleton = NodePath("../..")
+pair = NodePath("../portal")
+size = Vector2(1.71, 2.63)

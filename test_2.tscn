@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://rpb786vxk4pk"]
+
+[ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_72a1h"]
+[ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="2_crc6u"]
+[ext_resource type="Shader" path="res://portalshader.gdshader" id="3_cbqop"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7dnjq"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g7dq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cbqop")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_7dnjq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gtegh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ob3od"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cbqop")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_gtegh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsnqc"]
+albedo_color = Color(1, 0.364706, 0.364706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b347g"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pa4lg"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1pc6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_cbqop")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_pa4lg")
+
+[node name="test2" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_72a1h")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.085499, 0.843495, -0.321374)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991029, 0)
+use_collision = true
+size = Vector3(10, 0.215, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(-1, 0, -4.37114e-07, 0, 1, 0, 4.37114e-07, 0, -1, -5.87241, 1.03608, 0)
+use_collision = true
+size = Vector3(5.42, 2.07117, 5.62)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02796, -0.306317, 0)
+operation = 2
+use_collision = true
+size = Vector3(3.072, 2.015, 2.095)
+
+[node name="portal" parent="CSGBox3D/CSGBox3D3" node_paths=PackedStringArray("pair") instance=ExtResource("2_crc6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95903, -0.176485, 0)
+material_override = SubResource("ShaderMaterial_2g7dq")
+skeleton = NodePath("../../../..")
+pair = NodePath("../../../CSGBox3D2/portal2")
+size = Vector2(2.225, 1.82)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(-3.93403e-07, 0, 1, 0, 1, 0, -1, 0, -3.93403e-07, -0.334274, 0.998702, -5.44223)
+use_collision = true
+size = Vector3(5.42, 2.07117, 5.62)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D/CSGBox3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02796, -0.306317, 0)
+operation = 2
+use_collision = true
+size = Vector3(3.072, 2.015, 2.095)
+
+[node name="portal" parent="CSGBox3D/CSGBox3D4" node_paths=PackedStringArray("pair") instance=ExtResource("2_crc6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83419, -0.176485, 5.96046e-08)
+material_override = SubResource("ShaderMaterial_ob3od")
+skeleton = NodePath("../../../..")
+pair = NodePath("../../../CSGBox3D2/portal2")
+size = Vector2(13.215, 13)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.681411, -0.731901, 0, 0.731901, 0.681411, 0, 1.99905, 28.068)
+material_override = SubResource("StandardMaterial3D_nsnqc")
+use_collision = true
+size = Vector3(10, 4.21309, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D2"]
+operation = 2
+use_collision = true
+size = Vector3(8.565, 3.298, 9.255)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32436, -0.712902, 0)
+mesh = SubResource("CylinderMesh_b347g")
+
+[node name="portal2" parent="CSGBox3D2" node_paths=PackedStringArray("pair") instance=ExtResource("2_crc6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.886161, -0.66957, 0.440699)
+material_override = SubResource("ShaderMaterial_u1pc6")
+skeleton = NodePath("../..")
+pair = NodePath("../../CSGBox3D/CSGBox3D3/portal")
+size = Vector2(2, 2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.659582, 0.751633, 0, -0.751633, 0.659582, 0, 1.77381, 0)

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://blp56h0qayjwk"]
+
+[ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_n8ntn"]
+[ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="2_lg2k8"]
+[ext_resource type="Shader" path="res://portalshader.gdshader" id="3_qxec6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wm2ad"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_721m2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qxec6")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_wm2ad")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_c1tde"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n636"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qxec6")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_c1tde")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d868o"]
+albedo_color = Color(0.223988, 0.699806, 0.629464, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0mimm"]
+material = SubResource("StandardMaterial3D_d868o")
+
+[sub_resource type="TorusMesh" id="TorusMesh_i7s0f"]
+
+[node name="test_3" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_n8ntn")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.24125, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, -0.0431671, 0.0980358, -5.22851)
+use_collision = true
+size = Vector3(50, 0.1, 50)
+
+[node name="portal" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("2_lg2k8")]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, 13.7808, 1.14561, -1.11931)
+material_override = SubResource("ShaderMaterial_721m2")
+skeleton = NodePath("../..")
+pair = NodePath("../portal2")
+size = Vector2(4, 4)
+
+[node name="portal2" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("2_lg2k8")]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, 1.79633, 1.14561, 11.3517)
+material_override = SubResource("ShaderMaterial_7n636")
+skeleton = NodePath("../..")
+pair = NodePath("../portal")
+size = Vector2(4, 4)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, 11.342, 1.22178, -1.49196)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, 0.639995, 1.22178, 10.3142)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, -1.03635, 0.762765, 9.07249)
+mesh = SubResource("BoxMesh_0mimm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.713825, 0, -0.700324, 0, 1, 0, 0.700324, 0, 0.713825, 12.2343, 0.0980358, -5.25629)
+mesh = SubResource("TorusMesh_i7s0f")
