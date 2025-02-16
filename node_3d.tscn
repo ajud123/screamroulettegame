@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw02we5g60g88"]
+[gd_scene load_steps=14 format=3 uid="uid://cw02we5g60g88"]
 
+[ext_resource type="Material" uid="uid://bl33dmjydykr" path="res://dither/dithermaterial.tres" id="1_pax08"]
 [ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_ugqi7"]
 [ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="2_chfjr"]
 [ext_resource type="Shader" path="res://portalshader.gdshader" id="3_a3dw7"]
@@ -13,7 +14,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 background_mode = 2
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_bsjsr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_rxsf5"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -21,9 +22,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_bsjsr")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_rxsf5")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kw5u4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_cn7fi"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -31,12 +32,21 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_kw5u4")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_cn7fi")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xnv24"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoibg"]
+albedo_color = Color(0.303627, 0.609701, 0, 1)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ysoxx")
+
+[node name="player" parent="." instance=ExtResource("1_ugqi7")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0700753, 1.37182, -1.79159)
 
 [node name="house" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -107,10 +117,6 @@ size = Vector3(2.88062, 0.444336, 2.45166)
 transform = Transform3D(1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0, 1, 1.5921, 3.59931, -5.0863)
 size = Vector3(2.88062, 0.444336, 2.45166)
 
-[node name="player" parent="." instance=ExtResource("1_ugqi7")]
-unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0700753, 1.37182, -1.79159)
-
 [node name="portal" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("2_chfjr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.76137, 1.50586, -3.97123)
 material_override = SubResource("ShaderMaterial_1j7hb")
@@ -122,3 +128,25 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.4432
 material_override = SubResource("ShaderMaterial_sakah")
 pair = NodePath("../portal")
 size = Vector2(1.39, 3.055)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = ExtResource("1_pax08")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, 1.55674, 3.02332)
+mesh = SubResource("CylinderMesh_xnv24")
+surface_material_override/0 = SubResource("StandardMaterial3D_aoibg")
