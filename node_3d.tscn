@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cw02we5g60g88"]
+[gd_scene load_steps=25 format=3 uid="uid://cw02we5g60g88"]
 
 [ext_resource type="Material" uid="uid://bl33dmjydykr" path="res://dither/dithermaterial.tres" id="1_pax08"]
 [ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_ugqi7"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://MainView.gd" id="2_ipsfn"]
 [ext_resource type="Shader" path="res://portalshader.gdshader" id="3_a3dw7"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_u0w5i"]
-[ext_resource type="Texture2D" uid="uid://flcd7lvi1b10" path="res://greg/greg.png" id="6_pbm5u"]
+[ext_resource type="Texture2D" uid="uid://b44udv8usxnyo" path="res://greg/greg2.png" id="7_ms16r"]
 [ext_resource type="Script" path="res://greg/greg.gd" id="7_v3tcd"]
+[ext_resource type="Shader" path="res://lawrence/lawrence.gdshader" id="9_fphps"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hx7jw"]
 
@@ -23,10 +24,10 @@ shader_parameter/vignette_color = null
 sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 
 [sub_resource type="Environment" id="Environment_ysoxx"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_buajr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vg8bf"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -34,9 +35,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_buajr")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_vg8bf")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3jiuv"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_grr0g"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -44,16 +45,32 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_3jiuv")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_grr0g")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
-albedo_texture = ExtResource("6_pbm5u")
+albedo_texture = ExtResource("7_ms16r")
 
 [sub_resource type="QuadMesh" id="QuadMesh_q7f3l"]
 material = SubResource("StandardMaterial3D_vpq5q")
 flip_faces = true
-size = Vector2(401.93, 200.965)
+size = Vector2(533, 413)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mm4d3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_essfw"]
+noise = SubResource("FastNoiseLite_mm4d3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhvt7"]
+render_priority = 0
+shader = ExtResource("9_fphps")
+shader_parameter/limit = 0.54
+shader_parameter/div = 75.0
+shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2qsfn"]
+material = SubResource("ShaderMaterial_jhvt7")
+size = Vector2(1, 2)
 
 [node name="Node3D" type="Node3D"]
 
@@ -176,16 +193,21 @@ size = Vector2(1.39, 3.055)
 transform = Transform3D(1, -5.97015e-05, 0.000247517, 0, 0.972122, 0.234477, -0.000254615, -0.234477, 0.972122, 0, 67.7554, 273.429)
 mesh = SubResource("QuadMesh_q7f3l")
 script = ExtResource("7_v3tcd")
-scaling = 200.965
 offset = Vector3(0.0700753, 66.3836, 275.22)
 damageMult = 5
+gregDimensions = Vector2(533, 413)
 changeThreshold = 0.5
 
 [node name="the sun" type="DirectionalLight3D" parent="Control2/SubViewportContainer/SubViewport/greg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 light_color = Color(1, 0.47, 0.47, 1)
-light_energy = 1.795
+light_energy = 0.0
 shadow_enabled = true
+sky_mode = 1
+
+[node name="lawrence" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, -4.54064, 1.70311, -3.02364)
+mesh = SubResource("QuadMesh_2qsfn")
 
 [node name="Button" type="Button" parent="Control2"]
 layout_mode = 0

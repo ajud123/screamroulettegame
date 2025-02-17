@@ -4,6 +4,7 @@ extends MeshInstance3D
 @export var offset: Vector3;
 @export var changeInterval: float = 10;
 @export var damageMult = 1;
+@export var gregDimensions: Vector2;
 @export_range(0, 1, 0.05) var changeThreshold: float;
 var elapsed: float = 0;
 var rng = RandomNumberGenerator.new()
@@ -19,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	transform = transform.looking_at(%player.position)
 	if Engine.is_editor_hint(): # editor magic so we can adjust greg in editor
-		(mesh as QuadMesh).size = Vector2(2, 1) * scaling;
+		(mesh as QuadMesh).size = gregDimensions * scaling;
 		offset = global_position - %player.global_position;
 	else:
 		# the principle of it all is that every changeInterval seconds(?) 
