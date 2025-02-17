@@ -21,4 +21,5 @@ script = ExtResource("2_sev05")
 sensitivity = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ufnsb")

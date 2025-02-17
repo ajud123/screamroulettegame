@@ -1,0 +1,52 @@
+@tool
+extends MeshInstance3D
+@export var scaling: float = 1;
+@export var offset: Vector3;
+@export var changeInterval: float = 10;
+@export var damageMult = 1;
+@export_range(0, 1, 0.05) var changeThreshold: float;
+var elapsed: float = 0;
+var rng = RandomNumberGenerator.new()
+
+var targetPower: float = 0;
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	transform = transform.looking_at(%player.position)
+	if Engine.is_editor_hint(): # editor magic so we can adjust greg in editor
+		(mesh as QuadMesh).size = Vector2(2, 1) * scaling;
+		offset = global_position - %player.global_position;
+	else:
+		# the principle of it all is that every changeInterval seconds(?) 
+		# the game generates a random value and then checks if its above the threshold
+		# if it is, we turn on the lights and greg will watch for u
+		elapsed += delta*1;
+		if elapsed > changeInterval:
+			print("duration achieved")
+			var val = rng.randf_range(0, 1);
+			elapsed = 0
+			if val > changeThreshold:
+				print("the sun activates")
+				targetPower = 2
+			else:
+				print("the sun deactivates")
+				targetPower = 0
+		# we define a target power value so we can smoothly interpolate and it isnt as jarring
+		$"the sun".light_energy = lerpf($"the sun".light_energy, targetPower, delta)
+		if targetPower == 2:
+			# literal magic
+			var space_state = get_world_3d().direct_space_state
+			var query = PhysicsRayQueryParameters3D.create(%player.global_position, global_position)
+			var result = space_state.intersect_ray(query)
+			if !result:
+				# simple enough, just taking away health by the time elapsed and a multiplier so we can adjust it
+				%player.health -= delta * damageMult;
+				#print("I CAN SEE YOU")
+			pass
+		pass
+	pass

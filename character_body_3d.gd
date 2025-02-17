@@ -4,9 +4,25 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var camera: Camera3D
+var maxHealth = 100;
+var health: float:
+	get:
+		return health;
+	set(value):
+		health = clampf(value, 0, maxHealth);
+		
+var vignette: ColorRect
 
 func _ready() -> void:
+	health = 100;
 	camera = $Camera3D
+	vignette = %fx.get_node("vignette")
+	
+
+func _process(delta: float) -> void:
+	(vignette.material as ShaderMaterial).set_shader_parameter("outerRadius", health/maxHealth * 5);
+	(vignette.material as ShaderMaterial).set_shader_parameter("MainAlpha", (1-(health/maxHealth)) * 0.5);
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
