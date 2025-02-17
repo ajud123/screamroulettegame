@@ -27,7 +27,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 background_mode = 1
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6j05r"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1hdej"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -35,9 +35,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_6j05r")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_1hdej")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8p5ip"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_he545"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -45,7 +45,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_8p5ip")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_he545")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
