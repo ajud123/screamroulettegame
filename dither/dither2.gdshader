@@ -21,12 +21,12 @@ const int bayer4[16] = { //4x4
 
 const int bayer8[64] = { //8x8
     0, 32, 8, 40, 2, 34, 10, 42,
-    48, 16, 56, 24, 50, 18, 58, 26,  
-    12, 44,  4, 36, 14, 46,  6, 38, 
-    60, 28, 52, 20, 62, 30, 54, 22,  
-    3, 35, 11, 43,  1, 33,  9, 41,  
-    51, 19, 59, 27, 49, 17, 57, 25, 
-    15, 47,  7, 39, 13, 45,  5, 37, 
+    48, 16, 56, 24, 50, 18, 58, 26,
+    12, 44,  4, 36, 14, 46,  6, 38,
+    60, 28, 52, 20, 62, 30, 54, 22,
+    3, 35, 11, 43,  1, 33,  9, 41,
+    51, 19, 59, 27, 49, 17, 57, 25,
+    15, 47,  7, 39, 13, 45,  5, 37,
     63, 31, 55, 23, 61, 29, 53, 21
 };
 
@@ -51,7 +51,7 @@ void fragment() {
 	vec2 screen_size_pure = vec2(textureSize(TEXTURE, 0));
 	vec2 screen_sample_uv = floor(UV * screen_size) / screen_size;
 	vec3 screen_col = texture(TEXTURE, screen_sample_uv).rgb;
-	
+
 	float bayer = GetBayer8(int(UV.x * screen_size.x), int(UV.y * screen_size.y));
 	vec3 output = screen_col + _Spread * bayer;
 	output.r = floor((_RedColorCount - 1.0f) * output.r + 0.5) / (_RedColorCount - 1.0f);

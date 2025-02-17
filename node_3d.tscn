@@ -27,7 +27,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 background_mode = 1
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1hdej"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_55g1y"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -35,9 +35,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_1hdej")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_55g1y")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_he545"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_h50pf"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -45,7 +45,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_he545")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_h50pf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
@@ -57,8 +57,11 @@ flip_faces = true
 size = Vector2(533, 413)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mm4d3"]
+noise_type = 0
+frequency = 0.0035
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_essfw"]
+width = 1024
 noise = SubResource("FastNoiseLite_mm4d3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhvt7"]
@@ -66,6 +69,7 @@ render_priority = 0
 shader = ExtResource("9_fphps")
 shader_parameter/limit = 0.54
 shader_parameter/div = 75.0
+shader_parameter/distanceModifier = 5.93
 shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2qsfn"]
@@ -205,7 +209,7 @@ shadow_enabled = true
 sky_mode = 1
 
 [node name="lawrence" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, -4.54064, 1.70311, -3.02364)
+transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, -7.69155, 1.70311, -3.02364)
 mesh = SubResource("QuadMesh_2qsfn")
 
 [node name="Button" type="Button" parent="Control2"]

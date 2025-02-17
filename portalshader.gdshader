@@ -19,7 +19,7 @@ void fragment() {
 	//// Adjust for aspect ratio and FOV
 	//local_uv.x *= VIEWPORT_SIZE.x / VIEWPORT_SIZE.y;
 	//local_uv *= -1.0 / PROJECTION_MATRIX[1][1];
-	
+
 	vec2 base_uv = UV;
 
 	vec4 albedo_tex3 = texture(texture_albedo, SCREEN_UV);
@@ -32,5 +32,5 @@ void fragment() {
 }
 
 void light() {
-	
+
 }
