@@ -27,7 +27,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 background_mode = 1
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vg8bf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_6j05r"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -35,9 +35,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_vg8bf")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_6j05r")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_grr0g"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8p5ip"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -45,7 +45,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_grr0g")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_8p5ip")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
@@ -72,7 +72,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
 material = SubResource("ShaderMaterial_jhvt7")
 size = Vector2(1, 2)
 
-[node name="Node3D" type="Node3D"]
+[node name="d" type="Node3D"]
 
 [node name="Control2" type="Control" parent="."]
 layout_mode = 3
@@ -190,16 +190,15 @@ pair = NodePath("../portal")
 size = Vector2(1.39, 3.055)
 
 [node name="greg" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, -5.97015e-05, 0.000247517, 0, 0.972122, 0.234477, -0.000254615, -0.234477, 0.972122, 0, 67.7554, 273.429)
+transform = Transform3D(1, -5.97014e-05, 0.000247517, 0, 0.972122, 0.234477, -0.000254615, -0.234477, 0.972122, 0, 67.7554, 273.429)
 mesh = SubResource("QuadMesh_q7f3l")
 script = ExtResource("7_v3tcd")
-offset = Vector3(0.0700753, 66.3836, 275.22)
+offset = Vector3(0.0700753, 66.3836, 275.221)
 damageMult = 5
 gregDimensions = Vector2(533, 413)
 changeThreshold = 0.5
 
 [node name="the sun" type="DirectionalLight3D" parent="Control2/SubViewportContainer/SubViewport/greg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 light_color = Color(1, 0.47, 0.47, 1)
 light_energy = 0.0
 shadow_enabled = true
