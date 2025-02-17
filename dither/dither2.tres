@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://coqkdhbqau8l6"]
+
+[ext_resource type="Shader" path="res://dither/dither2.gdshader" id="1_d35h8"]
+
+[resource]
+shader = ExtResource("1_d35h8")
+shader_parameter/_RedColorCount = 16.0
+shader_parameter/_GreenColorCount = 16.0
+shader_parameter/_BlueColorCount = 16.0
+shader_parameter/u_dither_size = 4.0
+shader_parameter/_Spread = 0.05
