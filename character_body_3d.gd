@@ -13,6 +13,8 @@ var health: float:
 		
 var vignette: ColorRect
 
+var lastInteractable: InteractableObject = null;
+
 func _ready() -> void:
 	health = 100;
 	camera = $Camera3D
@@ -45,3 +47,19 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	var col = $Camera3D/RayCast3D.get_collider()
+	if col is InteractableObject:
+		if lastInteractable:
+			lastInteractable.disable_glow()
+		col.enable_glow()
+		lastInteractable = col;
+	else:
+		if lastInteractable and is_instance_valid(lastInteractable):
+			lastInteractable.disable_glow()
+			lastInteractable = null
+			
+	if Input.is_action_just_pressed("interactObject"):
+		for child in lastInteractable.baseObject.get_children():
+			#print("goin thru children " + child.name)
+			if child is Interaction:
+				child.interactWith()

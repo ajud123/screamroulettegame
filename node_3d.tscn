@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cw02we5g60g88"]
+[gd_scene load_steps=34 format=3 uid="uid://cw02we5g60g88"]
 
 [ext_resource type="Material" uid="uid://bl33dmjydykr" path="res://dither/dithermaterial.tres" id="1_pax08"]
 [ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_ugqi7"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b44udv8usxnyo" path="res://greg/greg2.png" id="7_ms16r"]
 [ext_resource type="Script" path="res://greg/greg.gd" id="7_v3tcd"]
 [ext_resource type="Shader" path="res://lawrence/lawrence.gdshader" id="9_fphps"]
+[ext_resource type="Shader" path="res://shaders/doornoise.gdshader" id="10_3eryr"]
+[ext_resource type="PackedScene" uid="uid://ibxliatqar2q" path="res://assets/burger.tscn" id="11_hgfoo"]
+[ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="12_5vqrw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hx7jw"]
 
@@ -27,7 +30,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ewqdk")
 background_mode = 1
 sky = SubResource("Sky_fkpyk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_55g1y"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_3lox2"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -35,9 +38,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_55g1y")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_3lox2")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_h50pf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1vayw"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -45,7 +48,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_a3dw7")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_h50pf")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_1vayw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
@@ -75,6 +78,26 @@ shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
 [sub_resource type="QuadMesh" id="QuadMesh_2qsfn"]
 material = SubResource("ShaderMaterial_jhvt7")
 size = Vector2(1, 2)
+
+[sub_resource type="Gradient" id="Gradient_23vfr"]
+offsets = PackedFloat32Array(0, 0.483607, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_da2bc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cgf0l"]
+color_ramp = SubResource("Gradient_23vfr")
+noise = SubResource("FastNoiseLite_da2bc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mv0un"]
+render_priority = 0
+shader = ExtResource("10_3eryr")
+shader_parameter/noise = SubResource("NoiseTexture2D_cgf0l")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gimqs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ly1r"]
+size = Vector3(0.231734, 2.87069, 2.3938)
 
 [node name="d" type="Node3D"]
 
@@ -211,6 +234,25 @@ sky_mode = 1
 [node name="lawrence" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport"]
 transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, -7.69155, 1.70311, -3.02364)
 mesh = SubResource("QuadMesh_2qsfn")
+
+[node name="lockedDoor" type="StaticBody3D" parent="Control2/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1253, 5.06014, -1.53143)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport/lockedDoor"]
+transform = Transform3D(0.231734, 0, 0, 0, 2.87069, 0, 0, 0, 2.3938, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_mv0un")
+mesh = SubResource("BoxMesh_gimqs")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control2/SubViewportContainer/SubViewport/lockedDoor"]
+shape = SubResource("BoxShape3D_3ly1r")
+
+[node name="burger" parent="Control2/SubViewportContainer/SubViewport" instance=ExtResource("11_hgfoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.54193, 0.307433, 0.258227)
+
+[node name="Node" type="Node" parent="Control2/SubViewportContainer/SubViewport/burger" node_paths=PackedStringArray("door")]
+script = ExtResource("12_5vqrw")
+door = NodePath("../../lockedDoor")
 
 [node name="Button" type="Button" parent="Control2"]
 layout_mode = 0
