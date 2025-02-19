@@ -23,6 +23,7 @@ var can_teleport: bool = true
 var teleporter: Area3D
 var subviewport: SubViewport;
 var cam_body: Node3D;
+var player: Node3D;
 
 func load_props() -> void:
 	subviewport = $SubViewport
@@ -45,6 +46,7 @@ func PointToPlaneDistance(pointPosition: Vector3, planePosition: Vector3, planeN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player = get_tree().get_root().find_child("player", true, false)
 	load_props()
 	pair.load_props()
 	
@@ -86,8 +88,8 @@ func _process(delta: float) -> void:
 		$SubViewport/anchor.global_position = teleporter.global_position
 		$SubViewport/anchor.global_rotation = global_rotation
 		
-		cam_body.global_position = %player.global_position
-		camera.global_rotation = %player.camera.global_rotation
+		cam_body.global_position = player.global_position
+		camera.global_rotation = player.camera.global_rotation
 		
 		# once the recreation is done, we can set the anchor's position
 		# to where the destination portal(teleporter) is and also apply the respective rotation

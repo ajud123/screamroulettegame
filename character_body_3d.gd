@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	var col = $Camera3D/RayCast3D.get_collider()
 	if col is InteractableObject:
-		if lastInteractable:
+		if lastInteractable and is_instance_valid(lastInteractable):
 			lastInteractable.disable_glow()
 		col.enable_glow()
 		lastInteractable = col;

@@ -17,7 +17,7 @@ void fragment() {
 	float dist = pixel_position.z + distanceModifier;
 	//todo: finish lawrence
 	float a = texture(noise, UV + TIME*8.).r;
-	// (a > limit ? a/div : 0.) * 
+	// (a > limit ? a/div : 0.) *
 	ALPHA = a * pow(1. - distance(UV, vec2(0.5, 0.5)) / 0.5, 5.) / 10. * dist;
 	// Called for every pixel the material is visible on.
 }
