@@ -1,15 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://i677da0udscw"]
+[gd_scene load_steps=29 format=3 uid="uid://i677da0udscw"]
 
 [ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="1_kue51"]
 [ext_resource type="Shader" path="res://portalshader.gdshader" id="2_wbngj"]
+[ext_resource type="Shader" path="res://greg/gregshader.gdshader" id="3_et4np"]
 [ext_resource type="Texture2D" uid="uid://b44udv8usxnyo" path="res://greg/greg2.png" id="3_wr738"]
+[ext_resource type="Texture2D" uid="uid://cms0ir75fsu6k" path="res://greg/eyeball_layerone.png" id="4_uhd0o"]
 [ext_resource type="Script" path="res://greg/greg.gd" id="4_uv8xg"]
+[ext_resource type="Texture2D" uid="uid://cxsgsw5i354pv" path="res://greg/eyeball_layertwo.png" id="5_0cn0s"]
 [ext_resource type="Shader" path="res://lawrence/lawrence.gdshader" id="5_h58vl"]
 [ext_resource type="Shader" path="res://shaders/doornoise.gdshader" id="6_wq1yq"]
 [ext_resource type="PackedScene" uid="uid://ibxliatqar2q" path="res://assets/burger.tscn" id="7_iyhsl"]
 [ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="8_71vpe"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_uwyac"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_b4tqk"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -17,9 +20,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_uwyac")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_b4tqk")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gvjw3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0dds5"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -27,7 +30,14 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_gvjw3")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_0dds5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31r1a"]
+render_priority = 0
+shader = ExtResource("3_et4np")
+shader_parameter/offset = Vector2(0, 0.117)
+shader_parameter/layerOne = ExtResource("4_uhd0o")
+shader_parameter/layerTwo = ExtResource("5_0cn0s")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0
@@ -149,6 +159,7 @@ size = Vector2(1.39, 3.055)
 
 [node name="greg" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.996863, 0.0185039, -0.0769571, 0, 0.972289, 0.233782, 0.0791504, -0.233048, 0.969239, 0, 67.7554, 273.429)
+material_override = SubResource("ShaderMaterial_31r1a")
 mesh = SubResource("QuadMesh_q7f3l")
 skeleton = NodePath("../..")
 script = ExtResource("4_uv8xg")

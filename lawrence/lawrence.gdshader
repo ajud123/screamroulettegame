@@ -18,7 +18,7 @@ void fragment() {
 	//todo: finish lawrence
 	float a = texture(noise, UV + TIME*8.).r;
 	// (a > limit ? a/div : 0.) *
-	ALPHA = a * pow(1. - distance(UV, vec2(0.5, 0.5)) / 0.5, 5.) / 10. * dist;
+	ALPHA = clamp(a * pow(1. - distance(UV, vec2(0.5, 0.5)) / 0.5, 5.) / 10. * dist, 0, 1);
 	// Called for every pixel the material is visible on.
 }
 
