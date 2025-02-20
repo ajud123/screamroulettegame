@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 			(mesh as QuadMesh).size = gregDimensions * scaling;
 			offset = global_position - player.global_position;
 	else:
+		global_position = %player.global_position + offset;
 		transform = transform.looking_at(player.position)
 		# the principle of it all is that every changeInterval seconds(?) 
 		# the game generates a random value and then checks if its above the threshold

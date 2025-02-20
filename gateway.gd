@@ -101,8 +101,9 @@ func _process(delta: float) -> void:
 		
 		pass
 		
+	var dist = ($SubViewport/anchor/body/Camera3D.global_position as Vector3).distance_to(pair.global_position)
 	#$SubViewport/anchor/body/Camera3D.near = clampf(($SubViewport/anchor/body/Camera3D.global_position as Vector3).distance_to(pair.global_position), 0.005, 1000)
-	#$SubViewport/anchor/body/Camera3D.near = clampf(dist, 0.005, 1000)
+	$SubViewport/anchor/body/Camera3D.near = clampf(dist, 0.005, 1000)
 	#print(name + " " + str(dist))
 	
 	#$SubViewport/anchor.rotation_degrees.y = rotation_degrees.y

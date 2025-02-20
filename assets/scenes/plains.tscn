@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7535vux5pga3"]
+
+[ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="1_ebw1j"]
+[ext_resource type="Shader" path="res://portalshader.gdshader" id="2_afn8v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mixme"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eexr0"]
+size = Vector2(100, 100)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uop1d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nd5vm"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_uop1d")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o8w1t"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh6o2"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_o8w1t")
+
+[node name="Plains" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_mixme")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_eexr0")
+
+[node name="house" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.801588, 0, 0.597877, 0, 1, 0, -0.597877, 0, 0.801588, -34.4098, 1.47831, -38.2023)
+use_collision = true
+
+[node name="doorway" type="CSGBox3D" parent="house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0.320374)
+size = Vector3(2.5, 3.25, 0.359253)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.274911)
+size = Vector3(6.069, 4.925, 0.25)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0476227, 0, -5.5111)
+size = Vector3(6.069, 4.925, 0.25)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="house"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.89563, 0, -2.62722)
+size = Vector3(6.069, 4.925, 0.25)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="house"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.89421, 0, -2.66006)
+size = Vector3(6.069, 4.925, 0.25)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="house"]
+transform = Transform3D(-4.21328e-08, -0.266313, 0.963887, -1.16409e-08, 0.963887, 0.266313, -1, 0, -4.37114e-08, -2.85345, 2.325, -2.66006)
+size = Vector3(7.739, 0.46, 6.185)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="house"]
+transform = Transform3D(-4.212e-08, 0.267373, 0.963593, 1.16872e-08, 0.963593, -0.267373, -1, 0, -4.37114e-08, 2.77612, 2.325, -2.66006)
+size = Vector3(7.739, 0.46, 6.185)
+
+[node name="doorway cutout" type="CSGBox3D" parent="house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.355896)
+operation = 2
+size = Vector3(2, 3, 1.42798)
+
+[node name="portal" parent="house/doorway cutout" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_nd5vm")
+pair = NodePath("../../../newplace/doorway cutout2/portal")
+size = Vector2(2.08, 3.18)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142255, 2.06851, 1.0853)
+
+[node name="newplace" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -32.7973, 0)
+use_collision = true
+size = Vector3(7, 4, 15)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="newplace"]
+operation = 2
+size = Vector3(6.5, 3.5, 14.5)
+
+[node name="doorway cutout2" type="CSGBox3D" parent="newplace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 7.239)
+operation = 2
+size = Vector3(2, 3, 1.42798)
+
+[node name="portal" parent="newplace/doorway cutout2" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.36693e-09, 0, 0.168536)
+material_override = SubResource("ShaderMaterial_dh6o2")
+skeleton = NodePath("../..")
+pair = NodePath("../../../house/doorway cutout/portal")
+size = Vector2(2.05, 3.105)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="newplace"]
+
+[node name="windows" type="CSGCombiner3D" parent="newplace"]
+operation = 2
+
+[node name="window" type="CSGBox3D" parent="newplace/windows"]
+size = Vector3(36.51, 2, 1)
+
+[node name="window2" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98113)
+size = Vector3(36.51, 2, 1)
+
+[node name="window3" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.15415)
+size = Vector3(36.51, 2, 1)
+
+[node name="window4" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.05215)
+size = Vector3(36.51, 2, 1)
+
+[node name="window6" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.9577)
+size = Vector3(36.51, 2, 1)
+
+[node name="window7" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.78469)
+size = Vector3(36.51, 2, 1)
+
+[node name="window8" type="CSGBox3D" parent="newplace/windows"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.88668)
+size = Vector3(36.51, 2, 1)

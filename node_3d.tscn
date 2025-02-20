@@ -1,15 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://cw02we5g60g88"]
+[gd_scene load_steps=19 format=3 uid="uid://cw02we5g60g88"]
 
 [ext_resource type="Material" uid="uid://bl33dmjydykr" path="res://dither/dithermaterial.tres" id="1_pax08"]
 [ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_ugqi7"]
 [ext_resource type="Script" path="res://MainView.gd" id="2_ipsfn"]
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_u0w5i"]
-[ext_resource type="PackedScene" uid="uid://i677da0udscw" path="res://assets/mainworld.tscn" id="5_qrv18"]
-[ext_resource type="Shader" path="res://shaders/glow.gdshader" id="6_8jwl5"]
-[ext_resource type="Script" path="res://SpawnedScene.gd" id="9_0q6ab"]
-[ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="12_5vqrw"]
-[ext_resource type="PackedScene" uid="uid://cjb23hosjsb7o" path="res://assets/tutorialitem.tscn" id="13_0oy6k"]
-[ext_resource type="Script" path="res://interactions/SceneSpawnerInteraction.gd" id="14_1lhfy"]
+[ext_resource type="PackedScene" uid="uid://b7535vux5pga3" path="res://assets/scenes/plains.tscn" id="5_igpx3"]
+[ext_resource type="Shader" path="res://greg/gregshader.gdshader" id="6_5q4md"]
+[ext_resource type="Texture2D" uid="uid://cms0ir75fsu6k" path="res://greg/eyeball_layerone.png" id="7_uwf0q"]
+[ext_resource type="Texture2D" uid="uid://cxsgsw5i354pv" path="res://greg/eyeball_layertwo.png" id="8_d620t"]
+[ext_resource type="Texture2D" uid="uid://b44udv8usxnyo" path="res://greg/greg2.png" id="9_6f6pk"]
+[ext_resource type="Script" path="res://greg/greg.gd" id="10_i73qe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xrcj"]
 
@@ -28,14 +28,21 @@ shader_parameter/outerRadius = 5.0
 shader_parameter/MainAlpha = 0.5
 shader_parameter/vignette_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_clwld"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmaog"]
 render_priority = 0
-shader = ExtResource("6_8jwl5")
+shader = ExtResource("6_5q4md")
+shader_parameter/offset = Vector2(0, 0.117)
+shader_parameter/layerOne = ExtResource("7_uwf0q")
+shader_parameter/layerTwo = ExtResource("8_d620t")
 
-[sub_resource type="Resource" id="Resource_88nkp"]
-script = ExtResource("9_0q6ab")
-Scene = ExtResource("5_qrv18")
-Position = Vector3(0, 0, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
+shading_mode = 0
+albedo_texture = ExtResource("9_6f6pk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jyum0"]
+material = SubResource("StandardMaterial3D_vpq5q")
+flip_faces = true
+size = Vector2(2128.57, 1606.57)
 
 [node name="d" type="Node3D"]
 
@@ -85,41 +92,28 @@ grow_vertical = 2
 
 [node name="player" parent="Control2/SubViewportContainer/SubViewport" instance=ExtResource("1_ugqi7")]
 unique_name_in_owner = true
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 21.8524, 1.37182, -1.79159)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
 
-[node name="tutorialworld" type="Node3D" parent="Control2/SubViewportContainer/SubViewport"]
+[node name="Plains" parent="Control2/SubViewportContainer/SubViewport" instance=ExtResource("5_igpx3")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Control2/SubViewportContainer/SubViewport/tutorialworld"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8568, 3.84344, -1.3099)
-use_collision = true
-size = Vector3(25.9538, 7.47607, 18.89)
+[node name="greg" type="MeshInstance3D" parent="Control2/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.889604, 0.456734, 0, -0.456734, 0.889604, 0, 513.033, 999.261)
+material_override = SubResource("ShaderMaterial_vmaog")
+mesh = SubResource("QuadMesh_jyum0")
+skeleton = NodePath("../..")
+script = ExtResource("10_i73qe")
+scaling = 3.89
+offset = Vector3(0, 513.033, 999.261)
+damageMult = 5
+gregDimensions = Vector2(547.19, 413)
+changeThreshold = 0.5
+runInEditor = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Control2/SubViewportContainer/SubViewport/tutorialworld/CSGBox3D"]
-operation = 2
-use_collision = true
-size = Vector3(25.674, 7.141, 18.335)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Control2/SubViewportContainer/SubViewport/tutorialworld"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75371, 0.755197, -1.3802)
-material_override = SubResource("ShaderMaterial_clwld")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Control2/SubViewportContainer/SubViewport/tutorialworld/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.61762, 0)
-spot_range = 9.48087
-spot_angle = 18.063
-
-[node name="burger" parent="Control2/SubViewportContainer/SubViewport/tutorialworld/CSGBox3D2" instance=ExtResource("13_0oy6k")]
-transform = Transform3D(-2.01072e-08, 0, 0.46, 0, 0.46, 0, -0.46, 0, -2.01072e-08, 0, 0.487749, 0)
-
-[node name="spawner" type="Node" parent="Control2/SubViewportContainer/SubViewport/tutorialworld/CSGBox3D2/burger" node_paths=PackedStringArray("parentNode")]
-script = ExtResource("14_1lhfy")
-parentNode = NodePath("../../../..")
-SpawnScenes = Array[ExtResource("9_0q6ab")]([SubResource("Resource_88nkp")])
-
-[node name="Node" type="Node" parent="Control2/SubViewportContainer/SubViewport/tutorialworld/CSGBox3D2/burger" node_paths=PackedStringArray("DestroyNodes")]
-script = ExtResource("12_5vqrw")
-DestroyNodes = [NodePath("../../..")]
-DestroySelf = true
+[node name="the sun" type="DirectionalLight3D" parent="Control2/SubViewportContainer/SubViewport/greg"]
+light_color = Color(1, 0.47, 0.47, 1)
+light_energy = 0.0
+shadow_enabled = true
+sky_mode = 1
 
 [node name="Button" type="Button" parent="Control2"]
 layout_mode = 0

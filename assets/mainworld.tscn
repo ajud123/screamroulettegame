@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ibxliatqar2q" path="res://assets/burger.tscn" id="7_iyhsl"]
 [ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="8_71vpe"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_b4tqk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m58qi"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -20,9 +20,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_b4tqk")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_m58qi")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0dds5"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2hkgt"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -30,7 +30,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_0dds5")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_2hkgt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_31r1a"]
 render_priority = 0
@@ -39,12 +39,12 @@ shader_parameter/offset = Vector2(0, 0.117)
 shader_parameter/layerOne = ExtResource("4_uhd0o")
 shader_parameter/layerTwo = ExtResource("5_0cn0s")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rx1h"]
 shading_mode = 0
 albedo_texture = ExtResource("3_wr738")
 
 [sub_resource type="QuadMesh" id="QuadMesh_q7f3l"]
-material = SubResource("StandardMaterial3D_vpq5q")
+material = SubResource("StandardMaterial3D_0rx1h")
 flip_faces = true
 size = Vector2(533, 413)
 
