@@ -9,7 +9,7 @@ size = Vector3(100, 0.1, 100)
 [sub_resource type="PlaneMesh" id="PlaneMesh_eexr0"]
 size = Vector2(100, 100)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_uop1d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8rlcs"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nd5vm"]
@@ -17,9 +17,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_uop1d")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_8rlcs")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_o8w1t"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_a7ksq"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dh6o2"]
@@ -27,7 +27,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_o8w1t")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_a7ksq")
 
 [node name="Plains" type="Node3D"]
 
