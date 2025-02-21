@@ -1,3 +1,4 @@
+class_name PlayerObject
 extends CharacterBody3D
 
 
@@ -59,7 +60,8 @@ func _physics_process(delta: float) -> void:
 			lastInteractable = null
 			
 	if Input.is_action_just_pressed("interactObject"):
-		for child in lastInteractable.baseObject.get_children():
-			#print("goin thru children " + child.name)
-			if child is Interaction:
-				child.interactWith()
+		if lastInteractable:
+			for child in lastInteractable.baseObject.get_children():
+				#print("goin thru children " + child.name)
+				if child is Interaction:
+					child.interactWith()

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4fd7xjpfkvd2"]
+
+[ext_resource type="Shader" path="res://lawrence/lawrence.gdshader" id="1_cdwi4"]
+[ext_resource type="Script" path="res://lawrence/lawrence.gd" id="2_ogs78"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mm4d3"]
+noise_type = 0
+frequency = 0.0035
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_essfw"]
+width = 1024
+noise = SubResource("FastNoiseLite_mm4d3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhvt7"]
+render_priority = 0
+shader = ExtResource("1_cdwi4")
+shader_parameter/limit = 0.54
+shader_parameter/div = 75.0
+shader_parameter/distanceModifier = 5.93
+shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2qsfn"]
+material = SubResource("ShaderMaterial_jhvt7")
+size = Vector2(1, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ckw1r"]
+
+[node name="lawrence" type="MeshInstance3D"]
+transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, 0, 0, 0)
+mesh = SubResource("QuadMesh_2qsfn")
+skeleton = NodePath("../..")
+script = ExtResource("2_ogs78")
+damageMult = 5
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ckw1r")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

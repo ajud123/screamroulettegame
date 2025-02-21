@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://i677da0udscw"]
+[gd_scene load_steps=25 format=3 uid="uid://i677da0udscw"]
 
 [ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="1_kue51"]
 [ext_resource type="Shader" path="res://portalshader.gdshader" id="2_wbngj"]
@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cms0ir75fsu6k" path="res://greg/eyeball_layerone.png" id="4_uhd0o"]
 [ext_resource type="Script" path="res://greg/greg.gd" id="4_uv8xg"]
 [ext_resource type="Texture2D" uid="uid://cxsgsw5i354pv" path="res://greg/eyeball_layertwo.png" id="5_0cn0s"]
-[ext_resource type="Shader" path="res://lawrence/lawrence.gdshader" id="5_h58vl"]
 [ext_resource type="Shader" path="res://shaders/doornoise.gdshader" id="6_wq1yq"]
 [ext_resource type="PackedScene" uid="uid://ibxliatqar2q" path="res://assets/burger.tscn" id="7_iyhsl"]
 [ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="8_71vpe"]
+[ext_resource type="PackedScene" uid="uid://b4fd7xjpfkvd2" path="res://lawrence/lawrence.tscn" id="8_uc14s"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_m58qi"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gr8cf"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1j7hb"]
@@ -20,9 +20,9 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_m58qi")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_gr8cf")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2hkgt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0yth4"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sakah"]
@@ -30,12 +30,13 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wbngj")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_2hkgt")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_0yth4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_31r1a"]
 render_priority = 0
 shader = ExtResource("3_et4np")
 shader_parameter/offset = Vector2(0, 0.117)
+shader_parameter/eyeClosed = false
 shader_parameter/layerOne = ExtResource("4_uhd0o")
 shader_parameter/layerTwo = ExtResource("5_0cn0s")
 
@@ -47,26 +48,6 @@ albedo_texture = ExtResource("3_wr738")
 material = SubResource("StandardMaterial3D_0rx1h")
 flip_faces = true
 size = Vector2(533, 413)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mm4d3"]
-noise_type = 0
-frequency = 0.0035
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_essfw"]
-width = 1024
-noise = SubResource("FastNoiseLite_mm4d3")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhvt7"]
-render_priority = 0
-shader = ExtResource("5_h58vl")
-shader_parameter/limit = 0.54
-shader_parameter/div = 75.0
-shader_parameter/distanceModifier = 5.93
-shader_parameter/noise = SubResource("NoiseTexture2D_essfw")
-
-[sub_resource type="QuadMesh" id="QuadMesh_2qsfn"]
-material = SubResource("ShaderMaterial_jhvt7")
-size = Vector2(1, 2)
 
 [sub_resource type="Gradient" id="Gradient_23vfr"]
 offsets = PackedFloat32Array(0, 0.483607, 1)
@@ -174,10 +155,7 @@ light_energy = 0.0
 shadow_enabled = true
 sky_mode = 1
 
-[node name="lawrence" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.783466, 0, 0.621435, 0, 1, 0, -0.621435, 0, 0.783466, -7.69155, 1.70311, -3.02364)
-mesh = SubResource("QuadMesh_2qsfn")
-skeleton = NodePath("../..")
+[node name="lawrence" parent="." instance=ExtResource("8_uc14s")]
 
 [node name="lockedDoor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1253, 5.06014, -1.53143)

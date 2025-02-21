@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cw02we5g60g88"]
+[gd_scene load_steps=20 format=3 uid="uid://cw02we5g60g88"]
 
 [ext_resource type="Material" uid="uid://bl33dmjydykr" path="res://dither/dithermaterial.tres" id="1_pax08"]
 [ext_resource type="PackedScene" uid="uid://c0md26rloyt4o" path="res://player.tscn" id="1_ugqi7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="3_u0w5i"]
 [ext_resource type="PackedScene" uid="uid://b7535vux5pga3" path="res://assets/scenes/plains.tscn" id="5_igpx3"]
 [ext_resource type="Shader" path="res://greg/gregshader.gdshader" id="6_5q4md"]
+[ext_resource type="Texture2D" uid="uid://cha18gjwk732u" path="res://greg/eyeball_closed.png" id="7_1oi28"]
 [ext_resource type="Texture2D" uid="uid://cms0ir75fsu6k" path="res://greg/eyeball_layerone.png" id="7_uwf0q"]
 [ext_resource type="Texture2D" uid="uid://cxsgsw5i354pv" path="res://greg/eyeball_layertwo.png" id="8_d620t"]
 [ext_resource type="Texture2D" uid="uid://b44udv8usxnyo" path="res://greg/greg2.png" id="9_6f6pk"]
@@ -32,8 +33,10 @@ shader_parameter/vignette_color = null
 render_priority = 0
 shader = ExtResource("6_5q4md")
 shader_parameter/offset = Vector2(0, 0.117)
+shader_parameter/eyeClosed = true
 shader_parameter/layerOne = ExtResource("7_uwf0q")
 shader_parameter/layerTwo = ExtResource("8_d620t")
+shader_parameter/layerClosed = ExtResource("7_1oi28")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpq5q"]
 shading_mode = 0

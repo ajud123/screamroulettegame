@@ -3,6 +3,7 @@ extends MeshInstance3D
 #@export var gatewayName: String;
 @export var pair: MeshInstance3D
 @export var gamma: float = 1;
+@export var changeClipping: bool = true;
 #@export var size: Vector2 = Vector2.ONE;
 
 @export
@@ -101,9 +102,11 @@ func _process(delta: float) -> void:
 		
 		pass
 		
-	var dist = ($SubViewport/anchor/body/Camera3D.global_position as Vector3).distance_to(pair.global_position)
-	#$SubViewport/anchor/body/Camera3D.near = clampf(($SubViewport/anchor/body/Camera3D.global_position as Vector3).distance_to(pair.global_position), 0.005, 1000)
-	$SubViewport/anchor/body/Camera3D.near = clampf(dist, 0.005, 1000)
+	if changeClipping and pair:
+		var dist = ($SubViewport/anchor/body/Camera3D.global_position as Vector3).distance_to(pair.global_position)
+		$SubViewport/anchor/body/Camera3D.near = clampf(dist, 0.005, 1000)
+	else:
+		$SubViewport/anchor/body/Camera3D.near = 0.005
 	#print(name + " " + str(dist))
 	
 	#$SubViewport/anchor.rotation_degrees.y = rotation_degrees.y

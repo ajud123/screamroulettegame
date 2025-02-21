@@ -14,12 +14,13 @@ shader_parameter/gamma = 10.0
 shader_parameter/texture_albedo = SubResource("ViewportTexture_erx50")
 
 [sub_resource type="QuadMesh" id="QuadMesh_gcmns"]
+resource_local_to_scene = true
 flip_faces = true
-size = Vector2(2.05, 3.105)
 orientation = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fh0fr"]
-size = Vector3(0.078, 3.105, 2.05)
+resource_local_to_scene = true
+size = Vector3(0.078, 1, 1)
 
 [node name="portal" type="MeshInstance3D"]
 layers = 2
@@ -39,6 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.84488, 1.22576, 3.32173)
 [node name="Camera3D" type="Camera3D" parent="SubViewport/anchor/body"]
 transform = Transform3D(-0.876391, 0, 0.481601, 0, 1, 0, -0.481601, 0, -0.876391, 0, 0, 0)
 cull_mask = 1048573
+near = 0.005
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewport/anchor/body/Camera3D"]
 visible = false
@@ -49,7 +51,7 @@ visible = false
 
 [node name="teleporter" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.2, 0, 0)
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="teleporter"]

@@ -40,9 +40,11 @@ func _process(delta: float) -> void:
 			elapsed = 0
 			if val > changeThreshold:
 				print("the sun activates")
+				(material_override as ShaderMaterial).set_shader_parameter("eyeClosed", false);
 				targetPower = 2
 			else:
 				print("the sun deactivates")
+				(material_override as ShaderMaterial).set_shader_parameter("eyeClosed", true);
 				targetPower = 0
 		# we define a target power value so we can smoothly interpolate and it isnt as jarring
 		$"the sun".light_energy = lerpf($"the sun".light_energy, targetPower, delta)

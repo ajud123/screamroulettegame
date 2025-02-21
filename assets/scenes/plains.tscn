@@ -1,7 +1,76 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7535vux5pga3"]
+[gd_scene load_steps=29 format=3 uid="uid://b7535vux5pga3"]
 
 [ext_resource type="PackedScene" uid="uid://bk46mxhiyydon" path="res://portal.tscn" id="1_ebw1j"]
 [ext_resource type="Shader" path="res://portalshader.gdshader" id="2_afn8v"]
+[ext_resource type="PackedScene" uid="uid://ibxliatqar2q" path="res://assets/burger.tscn" id="3_0xhyu"]
+[ext_resource type="Script" path="res://interactions/SceneSpawnerInteraction.gd" id="4_533mn"]
+[ext_resource type="Script" path="res://SpawnedScene.gd" id="5_lxsw7"]
+[ext_resource type="PackedScene" uid="uid://b4fd7xjpfkvd2" path="res://lawrence/lawrence.tscn" id="6_wa6wt"]
+[ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="7_0kaah"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fyn5y"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sm4f6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_fyn5y")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qxyql"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(100, 3)
+orientation = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qqe7d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ca164"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_qqe7d")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qhums"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(100, 3)
+orientation = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rke2k"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4klo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_rke2k")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ocd13"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(100, 3)
+orientation = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fgqbt"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d77q6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_afn8v")
+shader_parameter/gamma = 1.0
+shader_parameter/texture_albedo = SubResource("ViewportTexture_fgqbt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jqqjc"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(100, 3)
+orientation = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mixme"]
 size = Vector3(100, 0.1, 100)
@@ -9,7 +78,7 @@ size = Vector3(100, 0.1, 100)
 [sub_resource type="PlaneMesh" id="PlaneMesh_eexr0"]
 size = Vector2(100, 100)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8rlcs"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_w1dkx"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nd5vm"]
@@ -17,9 +86,15 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_8rlcs")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_w1dkx")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_a7ksq"]
+[sub_resource type="QuadMesh" id="QuadMesh_8f5uv"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(2.08, 3.18)
+orientation = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hscm2"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dh6o2"]
@@ -27,9 +102,55 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_a7ksq")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_hscm2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jybys"]
+resource_local_to_scene = true
+flip_faces = true
+size = Vector2(2.05, 3.105)
+orientation = 0
+
+[sub_resource type="Resource" id="Resource_jxa0j"]
+script = ExtResource("5_lxsw7")
+Scene = ExtResource("6_wa6wt")
+Position = Vector3(-6.41035, -34.5473, -2.6966)
 
 [node name="Plains" type="Node3D"]
+
+[node name="infinity" type="Node3D" parent="."]
+
+[node name="portal" parent="infinity" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.7766, 1.48505, 0)
+material_override = SubResource("ShaderMaterial_sm4f6")
+mesh = SubResource("QuadMesh_qxyql")
+pair = NodePath("../portal2")
+changeClipping = false
+size = Vector2(100, 3)
+
+[node name="portal2" parent="infinity" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -48.6393, 1.34941, 4.25218e-06)
+material_override = SubResource("ShaderMaterial_ca164")
+mesh = SubResource("QuadMesh_qhums")
+pair = NodePath("../portal")
+changeClipping = false
+size = Vector2(100, 3)
+
+[node name="portal3" parent="infinity" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.1586e-06, 1.25267, 49.383)
+material_override = SubResource("ShaderMaterial_c4klo")
+mesh = SubResource("QuadMesh_ocd13")
+pair = NodePath("../portal4")
+changeClipping = false
+size = Vector2(100, 3)
+
+[node name="portal4" parent="infinity" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.15624e-06, 1.44559, -49.3291)
+material_override = SubResource("ShaderMaterial_d77q6")
+mesh = SubResource("QuadMesh_jqqjc")
+skeleton = NodePath("../..")
+pair = NodePath("../portal3")
+changeClipping = false
+size = Vector2(100, 3)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -79,6 +200,7 @@ size = Vector3(2, 3, 1.42798)
 [node name="portal" parent="house/doorway cutout" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_nd5vm")
+mesh = SubResource("QuadMesh_8f5uv")
 pair = NodePath("../../../newplace/doorway cutout2/portal")
 size = Vector2(2.08, 3.18)
 
@@ -102,6 +224,7 @@ size = Vector3(2, 3, 1.42798)
 [node name="portal" parent="newplace/doorway cutout2" node_paths=PackedStringArray("pair") instance=ExtResource("1_ebw1j")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.36693e-09, 0, 0.168536)
 material_override = SubResource("ShaderMaterial_dh6o2")
+mesh = SubResource("QuadMesh_jybys")
 skeleton = NodePath("../..")
 pair = NodePath("../../../house/doorway cutout/portal")
 size = Vector2(2.05, 3.105)
@@ -137,3 +260,15 @@ size = Vector3(36.51, 2, 1)
 [node name="window8" type="CSGBox3D" parent="newplace/windows"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.88668)
 size = Vector3(36.51, 2, 1)
+
+[node name="burger" parent="." instance=ExtResource("3_0xhyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0623856, -34.5473, -0.0753525)
+
+[node name="spawnlawrence" type="Node" parent="burger" node_paths=PackedStringArray("parentNode")]
+script = ExtResource("4_533mn")
+parentNode = NodePath("../..")
+SpawnScenes = Array[ExtResource("5_lxsw7")]([SubResource("Resource_jxa0j")])
+
+[node name="destroyself" type="Node" parent="burger"]
+script = ExtResource("7_0kaah")
+DestroySelf = true
