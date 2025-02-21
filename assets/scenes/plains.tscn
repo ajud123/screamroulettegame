@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b4fd7xjpfkvd2" path="res://lawrence/lawrence.tscn" id="6_wa6wt"]
 [ext_resource type="Script" path="res://interactions/DoorUnlockCollectible.gd" id="7_0kaah"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fyn5y"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0svya"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sm4f6"]
@@ -16,7 +16,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_fyn5y")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_0svya")
 
 [sub_resource type="QuadMesh" id="QuadMesh_qxyql"]
 resource_local_to_scene = true
@@ -24,7 +24,7 @@ flip_faces = true
 size = Vector2(100, 3)
 orientation = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qqe7d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gygqw"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ca164"]
@@ -32,7 +32,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_qqe7d")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_gygqw")
 
 [sub_resource type="QuadMesh" id="QuadMesh_qhums"]
 resource_local_to_scene = true
@@ -40,7 +40,7 @@ flip_faces = true
 size = Vector2(100, 3)
 orientation = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_rke2k"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_k70s8"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c4klo"]
@@ -48,7 +48,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_rke2k")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_k70s8")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ocd13"]
 resource_local_to_scene = true
@@ -56,7 +56,7 @@ flip_faces = true
 size = Vector2(100, 3)
 orientation = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fgqbt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n3jt8"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d77q6"]
@@ -64,7 +64,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_fgqbt")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_n3jt8")
 
 [sub_resource type="QuadMesh" id="QuadMesh_jqqjc"]
 resource_local_to_scene = true
@@ -78,7 +78,7 @@ size = Vector3(100, 0.1, 100)
 [sub_resource type="PlaneMesh" id="PlaneMesh_eexr0"]
 size = Vector2(100, 100)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_w1dkx"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_u3x06"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nd5vm"]
@@ -86,7 +86,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_w1dkx")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_u3x06")
 
 [sub_resource type="QuadMesh" id="QuadMesh_8f5uv"]
 resource_local_to_scene = true
@@ -94,7 +94,7 @@ flip_faces = true
 size = Vector2(2.08, 3.18)
 orientation = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hscm2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vgltg"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dh6o2"]
@@ -102,7 +102,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_afn8v")
 shader_parameter/gamma = 1.0
-shader_parameter/texture_albedo = SubResource("ViewportTexture_hscm2")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_vgltg")
 
 [sub_resource type="QuadMesh" id="QuadMesh_jybys"]
 resource_local_to_scene = true

@@ -71,8 +71,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	if Engine.is_editor_hint() and pair:
+		var editor_interface = Engine.get_singleton("EditorInterface")
+
 		(self.material_override as ShaderMaterial).set_shader_parameter("gamma", gamma)
-		var cam = EditorInterface.get_editor_viewport_3d(0).get_camera_3d()
+		var cam = editor_interface.get_editor_viewport_3d(0).get_camera_3d()
 		
 		$SubViewport/anchor.global_position = teleporter.global_position
 		$SubViewport/anchor.global_rotation = global_rotation

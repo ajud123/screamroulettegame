@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 			lastInteractable = null
 			
 	if Input.is_action_just_pressed("interactObject"):
-		if lastInteractable:
+		if is_instance_valid(lastInteractable):
 			for child in lastInteractable.baseObject.get_children():
 				#print("goin thru children " + child.name)
 				if child is Interaction:

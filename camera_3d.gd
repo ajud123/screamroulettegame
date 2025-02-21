@@ -11,7 +11,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var mouse = event as InputEventMouseMotion
 		parent.rotation_degrees.y += mouse.relative.x * -sensitivity;
-		rotation_degrees.x += mouse.relative.y * -sensitivity;
+		rotation_degrees.x = clampf(rotation_degrees.x + (mouse.relative.y * -sensitivity), -90, 90);
+	if (Input.mouse_mode != Input.MOUSE_MODE_CAPTURED) and event is InputEventMouseButton: 
+		print("should capture mouse")
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		pass
 	pass
 

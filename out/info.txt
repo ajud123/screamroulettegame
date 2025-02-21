@@ -1,0 +1,7 @@
+so basically
+upload the files depedning on what we can upload
+if we can only like upload one file, upload windows_packed.exe
+if we can multiple, we could upload windows.exe and windows.pck as an archive or whatever
+same goes for linux aswell
+although im not sure if theres an actual difference between the packed and non packed versions
+so for convenience ig just use the packed one
